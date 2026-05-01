@@ -1,4 +1,4 @@
-name: APK DJ PRO V3 - FIX JDK NANYA
+name: APK DJ PRO V3 - FIX JDK NANYA BANGET
 on:
   workflow_dispatch:
 
@@ -25,7 +25,8 @@ jobs:
       - name: Kasih Tau Bubblewrap Lokasi JDK + SDK
         run: |
           mkdir -p ~/.bubblewrap
-          echo '{"jdkPath":"/usr/lib/jvm/temurin-17-jdk-amd64","androidSdkPath":"/usr/local/lib/android/sdk"}' > ~/.bubblewrap/config.json
+          echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"'$ANDROID_SDK_ROOT'"}' > ~/.bubblewrap/config.json
+          echo "Isi config.json:"
           cat ~/.bubblewrap/config.json
           
       - name: Build APK Non-Interactive
