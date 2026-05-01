@@ -1,4 +1,4 @@
-name: APK DJ PRO V3 ULIMATE - PWABuilder
+name: APK DJ PRO V3 ULIMATE - SIMPLE
 on:
   workflow_dispatch:
 
@@ -6,14 +6,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build APK dari PWA
-        uses: pwa-builder/pwa-studio-action@v2
-        with:
-          url: https://edit-dj.vercel.app
-          platform: android
+      - name: Generate APK
+        run: |
+          npm install -g @bubblewrap/cli
+          bubblewrap build https://edit-dj.vercel.app --skipSigning
           
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: DJ-PRO-V3-ULIMATE-APK
-          path: output/*.apk
+          path: app-release-unsigned.apk
