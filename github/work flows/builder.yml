@@ -1,0 +1,24 @@
+name: APK Builder Kaka
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Tempel Link PWA di sini'
+        required: true
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bikin APK dari Link
+        run: |
+          npm i -g @bubblewrap/cli
+          echo "Y" | bubblewrap init --manifest=${{ github.event.inputs.url }}/manifest.json
+          bubblewrap build
+          
+      - name: Simpen APK nya
+        uses: actions/upload-artifact@v4
+        with:
+          name: APK-Jadi-Kaka
+          path: app-release-signed.apk
