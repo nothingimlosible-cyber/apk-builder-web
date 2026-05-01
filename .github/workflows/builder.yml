@@ -1,4 +1,4 @@
-name: APK Builder Kaka V5 TANPA TANYA
+name: APK Builder DJ PRO V3 ULIMATE
 on:
   workflow_dispatch:
     inputs:
@@ -22,15 +22,21 @@ jobs:
       - name: 3. Install Bubblewrap
         run: npm i -g @bubblewrap/cli
         
-      - name: 4. Bikin Config Manual Biar Gak Nanya
+      - name: 4. KASIH TAU BUBBLEWRAP LOKASI JDK
+        run: |
+          mkdir -p ~/.bubblewrap
+          echo "jdkPath=/usr/lib/jvm/temurin-17-jdk-amd64" >> ~/.bubblewrap/config.json
+          echo "androidSdkPath=/usr/local/lib/android/sdk" >> ~/.bubblewrap/config.json
+        
+      - name: 5. Bikin Config Manual DJ PRO V3 ULIMATE
         run: |
           mkdir twa
           cat > twa/twa-manifest.json << 'EOF'
           {
-            "packageId": "app.djpro.jedagjedug",
+            "packageId": "app.djpro.v3.ulimate",
             "host": "edit-dj.vercel.app",
-            "name": "DJ PRO V3 JEDAG JEDUG",
-            "launcherName": "DJ PRO",
+            "name": "DJ PRO V3 ULIMATE",
+            "launcherName": "DJ PRO V3",
             "display": "standalone",
             "themeColor": "#FF0080",
             "backgroundColor": "#0a0a0a",
@@ -38,22 +44,16 @@ jobs:
             "iconUrl": "https://edit-dj.vercel.app/icon-512.png",
             "maskableIconUrl": "https://edit-dj.vercel.app/icon-512.png",
             "splashScreenFadeOutDuration": 300,
-            "signingKey": {
-              "path": "./android.keystore",
-              "alias": "android"
-            },
-            "appVersionName": "1.0.0",
-            "appVersionCode": 1,
-            "shortcuts": [],
-            "generatorApp": "bubblewrap-cli"
+            "appVersionName": "3.0.0",
+            "appVersionCode": 3
           }
           EOF
           
-      - name: 5. Build APK Langsung
+      - name: 6. Build APK Langsung
         run: bubblewrap build --skipSigning -d twa
         
-      - name: 6. Upload APK
+      - name: 7. Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: DJ-PRO-V3-APK
+          name: DJ-PRO-V3-ULIMATE-APK
           path: twa/app-release-unsigned.apk
