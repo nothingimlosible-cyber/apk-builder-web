@@ -1,4 +1,4 @@
-name: APK DJ PRO V3 - FIX JDK NANYA BANGET
+name: APK DJ PRO V3 - KETOK Y OTOMATIS
 on:
   workflow_dispatch:
 
@@ -22,16 +22,9 @@ jobs:
       - name: Install Bubblewrap
         run: npm install -g @bubblewrap/cli
         
-      - name: Kasih Tau Bubblewrap Lokasi JDK + SDK
+      - name: Build APK + Jawab "n" Otomatis
         run: |
-          mkdir -p ~/.bubblewrap
-          echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"'$ANDROID_SDK_ROOT'"}' > ~/.bubblewrap/config.json
-          echo "Isi config.json:"
-          cat ~/.bubblewrap/config.json
-          
-      - name: Build APK Non-Interactive
-        run: |
-          bubblewrap init --manifest=https://edit-dj.vercel.app/manifest.json --directory=twa
+          yes n | bubblewrap init --manifest=https://edit-dj.vercel.app/manifest.json --directory=twa
           cd twa
           bubblewrap build --skipSigning
           
