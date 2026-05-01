@@ -1,4 +1,4 @@
-name: APK Builder DJ PRO V3 ULIMATE
+name: APK Builder DJ PRO V3 ULIMATE FINAL
 on:
   workflow_dispatch:
     inputs:
@@ -28,7 +28,7 @@ jobs:
           echo "jdkPath=/usr/lib/jvm/temurin-17-jdk-amd64" >> ~/.bubblewrap/config.json
           echo "androidSdkPath=/usr/local/lib/android/sdk" >> ~/.bubblewrap/config.json
         
-      - name: 5. Bikin Config Manual DJ PRO V3 ULIMATE
+      - name: 5. Config DJ PRO V3 ULIMATE Icon 192
         run: |
           mkdir twa
           cat > twa/twa-manifest.json << 'EOF'
@@ -41,8 +41,8 @@ jobs:
             "themeColor": "#FF0080",
             "backgroundColor": "#0a0a0a",
             "startUrl": "/",
-            "iconUrl": "https://edit-dj.vercel.app/icon-512.png",
-            "maskableIconUrl": "https://edit-dj.vercel.app/icon-512.png",
+            "iconUrl": "https://edit-dj.vercel.app/icon-192.png",
+            "maskableIconUrl": "https://edit-dj.vercel.app/icon-192.png",
             "splashScreenFadeOutDuration": 300,
             "appVersionName": "3.0.0",
             "appVersionCode": 3
