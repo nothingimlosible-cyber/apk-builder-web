@@ -1,4 +1,4 @@
-name: APK Builder Kaka V3 ANTI GAGAL
+name: APK Builder Kaka V5 TANPA TANYA
 on:
   workflow_dispatch:
     inputs:
@@ -22,18 +22,38 @@ jobs:
       - name: 3. Install Bubblewrap
         run: npm i -g @bubblewrap/cli
         
-      - name: 4. Auto Answer Bubblewrap
+      - name: 4. Bikin Config Manual Biar Gak Nanya
         run: |
-          mkdir -p ~/.bubblewrap
-          echo '{ "jdkPath": "/usr/lib/jvm/temurin-17-jdk-amd64", "androidSdkPath": "/usr/local/lib/android/sdk" }' > ~/.bubblewrap/config.json
-        
-      - name: 5. Build APK Anti Nanya
-        run: |
-          bubblewrap init --manifest=${{ github.event.inputs.url }}/manifest.json --skipPwaValidation
-          bubblewrap build --skipSigning
+          mkdir twa
+          cat > twa/twa-manifest.json << 'EOF'
+          {
+            "packageId": "app.djpro.jedagjedug",
+            "host": "edit-dj.vercel.app",
+            "name": "DJ PRO V3 JEDAG JEDUG",
+            "launcherName": "DJ PRO",
+            "display": "standalone",
+            "themeColor": "#FF0080",
+            "backgroundColor": "#0a0a0a",
+            "startUrl": "/",
+            "iconUrl": "https://edit-dj.vercel.app/icon-512.png",
+            "maskableIconUrl": "https://edit-dj.vercel.app/icon-512.png",
+            "splashScreenFadeOutDuration": 300,
+            "signingKey": {
+              "path": "./android.keystore",
+              "alias": "android"
+            },
+            "appVersionName": "1.0.0",
+            "appVersionCode": 1,
+            "shortcuts": [],
+            "generatorApp": "bubblewrap-cli"
+          }
+          EOF
           
+      - name: 5. Build APK Langsung
+        run: bubblewrap build --skipSigning -d twa
+        
       - name: 6. Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: DJ-PRO-V3-APK
-          path: app-release-unsigned.apk
+          path: twa/app-release-unsigned.apk
