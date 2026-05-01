@@ -1,4 +1,4 @@
-name: APK DJ PRO V3 ULIMATE - ANTI NANYA
+name: APK DJ PRO V3 - TWA MANUAL
 on:
   workflow_dispatch:
 
@@ -6,14 +6,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build APK Auto Yes
+      - name: Clone TWA Template
+        run: git clone https://github.com/GoogleChromeLabs/svgomg-twa.git twa
+        
+      - name: Ganti Config
         run: |
-          npm install -g @bubblewrap/cli
-          echo "y" | bubblewrap init --manifest=https://edit-dj.vercel.app/manifest.json
-          bubblewrap build --skipSigning
+          cd twa
+          sed -i 's/svgomg.firebaseapp.com/edit-dj.vercel.app/g' app/src/main/res/values/strings.xml
+          sed -i 's/SVGOMG/DJ PRO V3/g' app/src/main/res/values/strings.xml
+          
+      - name: Build APK
+        run: |
+          cd twa
+          ./gradlew assembleDebug
           
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: DJ-PRO-V3-ULIMATE-APK
-          path: app-release-unsigned.apk
+          path: twa/app/build/outputs/apk/debug/app-debug.apk
