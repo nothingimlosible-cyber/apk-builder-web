@@ -1,4 +1,4 @@
-name: APK DJ PRO V3 ULIMATE - SIMPLE
+name: APK DJ PRO V3 ULIMATE - ANTI NANYA
 on:
   workflow_dispatch:
 
@@ -6,10 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate APK
+      - name: Build APK Auto Yes
         run: |
           npm install -g @bubblewrap/cli
-          bubblewrap build https://edit-dj.vercel.app --skipSigning
+          echo "y" | bubblewrap init --manifest=https://edit-dj.vercel.app/manifest.json
+          bubblewrap build --skipSigning
           
       - name: Upload APK
         uses: actions/upload-artifact@v4
