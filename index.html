@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>APK Builder Kaka</title>
+  <style>
+    body{background:#0f0f0f;color:#fff;font-family:sans-serif;text-align:center;padding:30px}
+    .box{background:#1a1a1a;padding:20px;border-radius:16px;max-width:400px;margin:auto}
+    h1{color:#ff2d55}
+    input{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#000;color:#fff;margin:15px 0}
+    button{background:#ff2d55;color:#fff;border:none;padding:14px 24px;border-radius:8px;font-size:16px;width:100%}
+    .note{font-size:12px;opacity:.6;margin-top:20px}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>🔥 APK BUILDER KAKA 🔥</h1>
+    <p>Bebas bungkus PWA apa aja jadi APK</p>
+    <input type="text" id="link" placeholder="https://web-kamu.com">
+    <button onclick="caraPake()">BUNGKUS SEKARANG</button>
+    <div class="note">
+      V1.0 - Caranya: Copy link di atas → Buka tab "Actions" → Run workflow
+    </div>
+  </div>
+<script>
+function caraPake(){
+  let url = document.getElementById('link').value;
+  if(url) {
+    navigator.clipboard.writeText(url);
+    alert('Link udah di-copy!\n\nSekarang:\n1. Buka tab "Actions"\n2. Klik "APK Builder Kaka"\n3. Run workflow\n4. Paste link-nya\n5. Download APK di Artifacts');
+  } else {
+    alert('Isi link PWA dulu kak');
+  }
+}
+</script>
+</body>
+</html>
